@@ -2,7 +2,7 @@ import { ALLERGIES, COLORS, CUISINES, DIETS, VEGETABLES } from "@/constants/prof
 import { STORAGE_KEYS } from "@/constants/storage";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useMemo, useState } from "react";
 import { KeyboardAvoidingView, Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
@@ -93,7 +93,8 @@ function buildCitySuggestions(payload: unknown): CitySuggestion[] {
 
 export default function ConfigurationProfilScreen() {
   const TOTAL_STEPS = 7;
-  const [step, setStep] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>(0);
+  const { skipWelcome } = useLocalSearchParams<{ skipWelcome?: string }>();
+  const [step, setStep] = useState<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>(skipWelcome === "true" ? 1 : 0);
   const [diets, setDiets] = useState<string[]>([]);
   const [location, setLocation] = useState("");
   const [budget, setBudget] = useState<BudgetChoice | null>(null);

@@ -198,7 +198,7 @@ export default function ProfileScreen() {
 
   const onEditConfiguration = () => {
     setSettingsOpen(false);
-    router.push("/configuration-profil");
+    router.push("/configuration-profil?skipWelcome=true");
   };
 
   const onOpenEditUser = () => {
